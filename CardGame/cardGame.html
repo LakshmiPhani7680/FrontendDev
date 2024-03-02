@@ -69,6 +69,8 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+            border-radius: 10px;
+            box-shadow: 10px 10px 5px;
         }
 
         .card {
@@ -147,10 +149,23 @@
             transform: rotateY(180deg);
             text-align: center;
         }
+        .moves{
+            width: 10%;
+            padding: 1em;
+            color: #D6D6E7;
+            border-radius: 10px;
+            box-shadow: 10px 10px 5px;
+            background: linear-gradient(to right,
+                    #434343,
+                    #000000);
+        }
     </style>
 </head>
 
 <body>
+    <div class="moves" style="display: none;">
+        <h3 id="movesLeft">Moves Left: 0/30</h3>
+    </div>
     <div class="button" role="button">Play</div>
     <audio src="./clickCard.mp3" id="clickCard"></audio>
     <audio src="./flipCard.mp3" id="flipCard"></audio>
@@ -270,6 +285,7 @@
             document.getElementsByClassName('button')[0].addEventListener('click', () => {
                 document.getElementsByClassName('button')[0].style.display = 'none';
                 document.getElementsByClassName('cardContainer')[0].style.display = 'flex';
+                document.getElementsByClassName('moves')[0].style.display = 'block';
             })
             let hoveredCards = {}; // Dictionary to track hovered cards
             let len = 0; // Count of hovered cards
@@ -281,6 +297,7 @@
                     // $(this).find('.flip-card-inner').addClass('flipBack');
                     document.getElementById('clickCard').play();
                     moves++;
+                    document.getElementById('movesLeft').innerText=`Moves Left: ${moves}/30`;
                     console.log(moves);
                     if (moves < 30) {
                         let cardID = $(this).attr('id');

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagination Example</title>
+  </head>
+  <body>
+    <div id="items"></div>
+    <div id="pagination"></div>
+
+    <script>
+      const itemsPerPage = 5;
+      const items = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`); // Generate 50 items
+
+      const renderItems = (page) => {
+        const start = (page - 1) * itemsPerPage;
+        const end = page * itemsPerPage;
+        const paginatedItems = items.slice(start, end);
+
+        const itemsContainer = document.getElementById("items");
+        itemsContainer.innerHTML = paginatedItems
+          .map((item) => `<div>${item}</div>`)
+          .join("");
+      };
+
+      const renderPagination = () => {
+        const totalPages = Math.ceil(items.length / itemsPerPage);
+        const paginationContainer = document.getElementById("pagination");
+
+        let paginationHTML = "";
+        for (let i = 1; i <= totalPages; i++) {
+          paginationHTML += `<button onclick="changePage(${i})">${i}</button> `;
+        }
+        paginationContainer.innerHTML = paginationHTML;
+      };
+
+      const changePage = (page) => {
+        renderItems(page);
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderItems(1); // Render the first page initially
+        renderPagination();
+      });
+    </script>
+  </body>
+</html>

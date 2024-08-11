@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Events Example</title>
+</head>
+<body>
+  <h1>Press any key</h1>
+  <script>
+    document.addEventListener('keydown', function(event) {
+      console.log('Keydown event:');
+      console.log('Key:', event.key);
+      console.log('Code:', event.code);
+      console.log('Alt:', event.altKey);
+      console.log('Ctrl:', event.ctrlKey);
+      console.log('Shift:', event.shiftKey);
+      console.log('Meta:', event.metaKey);
+    });
+
+    document.addEventListener('keypress', function(event) {
+      console.log('Keypress event:');
+      console.log('Key:', event.key);
+      console.log('Char code:', event.charCode); // Note: `charCode` is deprecated; use `key` instead.
+    });
+  </script>
+</body>
+</html>
